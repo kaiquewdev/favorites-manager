@@ -55,3 +55,12 @@ CREATE TABLE auth_cas(
     uuid CHAR(512)
 );
 success!
+timestamp: 2011-08-28T03:37:16.698135
+CREATE TABLE bookmarks(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_ass CHAR(512),
+    name CHAR(512),
+    url CHAR(512),
+    status CHAR(512)
+);
+success!

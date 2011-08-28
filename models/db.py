@@ -123,3 +123,15 @@ mail.settings.sender = settings.email_sender
 mail.settings.login = settings.email_login
 
 #Modifications
+'''
+  define a type of status:
+  -private <- paticular, somente o dono da conta podera visualizar
+  -public <- podera compartilhar somente com o app
+  -share <- podera compartilhar com redes sociais
+'''
+db.define_table('bookmarks',
+  Field('user_ass',type='string'),
+  Field('name',type='string',label=T('Name of Bookmark')),
+  Field('url',type='string', label=T('Url of Bookmark')),
+  Field('status',type='string')
+)
