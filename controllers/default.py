@@ -7,8 +7,11 @@ def call():
     return service()
 ### end requires
 def index():
-    return dict()
+    return {}
+
+def about():
+	return {}
 
 def error():
-    return dict()
+    return {}
 
