@@ -130,8 +130,8 @@ mail.settings.login = settings.email_login
   -share <- podera compartilhar com redes sociais
 '''
 db.define_table('bookmarks',
-  Field('user_ass',type='string'),
-  Field('name',type='string',label=T('Name of Bookmark')),
-  Field('url',type='string', label=T('Url of Bookmark')),
-  Field('status',type='string')
+  Field('user',type='string', requires=IS_NOT_EMPTY()),
+  Field('name',type='string',label=T('Name of Bookmark'), requires=IS_NOT_EMPTY()),
+  Field('url',type='string', label=T('Url of Bookmark'), default='http://', requires=[IS_NOT_EMPTY(), IS_URL()]),
+  Field('status',type='string', requires=IS_NOT_EMPTY())
 )

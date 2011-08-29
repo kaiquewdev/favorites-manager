@@ -64,3 +64,5 @@ CREATE TABLE bookmarks(
     status CHAR(512)
 );
 success!
+timestamp: 2011-08-29T00:31:38.318370
+ALTER TABLE bookmarks ADD user CHAR(512);

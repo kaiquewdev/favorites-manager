@@ -1,3 +1,9 @@
 {{ extend 'layout.html' }}
 
 <h1>{{=T('My Bookmarks:')}}</h1>
+
+<ul>
+{{for m in marks:}}
+	{{=LI(A(m.name, _href=m.url, _target='top'))}}
+{{pass}}
+</ul>
