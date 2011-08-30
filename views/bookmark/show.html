@@ -2,8 +2,14 @@
 
 <h1>{{=T('My Bookmarks:')}}</h1>
 
+{{if marks:}}
 <ul>
-{{for m in marks:}}
-	{{=LI(A(m.name, _href=m.url, _target='top'))}}
-{{pass}}
+	{{for m in marks:}}
+		{{if m.user == auth.user.email:}}
+			{{=LI(A(m.name, _href=m.url, _target='top'), ' | ', A(T('Remove'), _href=URL('bookmark','remove/'+str(m.id)), _onclick='if(!window.confirm("You want remove bookmark ?")){return false}'))}}
+		{{pass}}
+	{{pass}}
 </ul>
+{{else:}}
+	<p>{{=T('No bookmarks')}} {{=A(T('Insert a new'), _href=URL('bookmark','new'))}}</p>
+{{pass}}

@@ -6,12 +6,8 @@ def call():
     session.forget()
     return service()
 ### end requires
-def index():
-    return {}
 
-def about():
-	return {}
-
-def error():
-    return {}
+def index():return {}
+def about():return {}
+def error():return {}
 

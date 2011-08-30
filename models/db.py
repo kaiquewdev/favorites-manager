@@ -131,7 +131,8 @@ mail.settings.login = settings.email_login
 '''
 db.define_table('bookmarks',
   Field('user',type='string', requires=IS_NOT_EMPTY()),
-  Field('name',type='string',label=T('Name of Bookmark'), requires=IS_NOT_EMPTY()),
-  Field('url',type='string', label=T('Url of Bookmark'), default='http://', requires=[IS_NOT_EMPTY(), IS_URL()]),
-  Field('status',type='string', requires=IS_NOT_EMPTY())
+  Field('name',type='string',label=T('Name of Bookmark'), requires=[IS_NOT_EMPTY(),IS_NOT_IN_DB(db, 'bookmarks.name')]),
+  Field('url',type='string', label=T('Url of Bookmark'), default='http://', requires=[IS_NOT_EMPTY(), IS_URL(), IS_NOT_IN_DB(db, 'bookmarks.url')]),
+  Field('status',type='string', requires=IS_NOT_EMPTY(), default='public'),
+  Field('creation',type='string', requires=IS_NOT_EMPTY())
 )

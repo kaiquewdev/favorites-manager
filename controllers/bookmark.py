@@ -9,11 +9,12 @@ def index():
 @auth.requires_login()	
 def new():
 	form = SQLFORM(db.bookmarks, fields=['name','url'])
-
+	
 	if form.accepts(request.vars, session):
-		response.flash = T('The new bookmark was created!')
+		db(db.bookmarks).update(user = auth.user.email, creation = request.now)
+		response.flash = T('New bookmark was created !')
 	elif form.errors:
-		redirect(URL('new'))
+		response.flash = T('Oops, look whos wrong !')
 
 	return {'form':form}
 	
@@ -21,6 +22,14 @@ def new():
 def show():
 	mymarks = db(db.bookmarks).select()
 	return {'marks':mymarks}
+
+@auth.requires_login()
+def remove():
+	if request.args(0):
+		db(db.bookmarks.id == request.args(0)).delete()
+		redirect(URL('bookmark','show'));
+	else:
+		redirect(URL('bookmark','show'))
 
 def edit():
 	return {}
