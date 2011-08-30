@@ -32,4 +32,12 @@ def remove():
 		redirect(URL('bookmark','show'))
 
 def edit():
-	return {}
+	rec = db.bookmarks(request.args(0)) or redirect(URL('show'))
+	form = SQLFORM(db.bookmarks, rec, fields=['name','url'])
+	
+	if form.accepts(request.vars, session):
+		redirect(URL('bookmark','show'))
+	elif form.errors:
+		response.flash = T('Oops, look whos wrong !')
+
+	return {'form':form}

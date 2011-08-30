@@ -6,7 +6,7 @@
 <ul>
 	{{for m in marks:}}
 		{{if m.user == auth.user.email:}}
-			{{=LI(A(m.name, _href=m.url, _target='top'), ' | ', A(T('Remove'), _href=URL('bookmark','remove/'+str(m.id)), _onclick='if(!window.confirm("You want remove bookmark ?")){return false}'))}}
+			{{=LI(A(m.name, _href=m.url, _target='top'), ' | ', A(T('Remove'), _href=URL('bookmark','remove/'+str(m.id)), _onclick='if(!window.confirm("You want remove bookmark ?")){return false}'), ' | ', A(T('Edit'), _href=URL('bookmark','edit/'+str(m.id))))}}
 		{{pass}}
 	{{pass}}
 </ul>

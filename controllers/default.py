@@ -7,7 +7,10 @@ def call():
     return service()
 ### end requires
 
-def index():return {}
+def index():
+	bookmarks = db(db.bookmarks.status == 'public').select()
+	return {'marks':bookmarks}
+
 def about():return {}
 def error():return {}
 

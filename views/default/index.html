@@ -1,3 +1,11 @@
 {{extend 'layout.html'}}
 
 <h1>{{=T('Welcome, look at the best public bookmarks:') }}</h1>
+
+{{if marks:}}
+	<ul>
+	{{for m in marks:}}
+		{{=LI(A(m.name, _href=m.url, _target='top'))}}
+	{{pass}}
+	</ul>
+{{pass}}
