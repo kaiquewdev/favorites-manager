@@ -8,19 +8,20 @@ def index():
 
 @auth.requires_login()	
 def new():
-	form = SQLFORM(db.bookmarks, fields=['name','url'])
+	import urllib
+	form = SQLFORM(db.bookmarks, fields=['name','url','note','keywords'])
 	
-	if form.accepts(request.vars, session):
+	if form.accepts(request.vars, session, dbio=False):
 		db(db.bookmarks).update(user = auth.user.email, creation = request.now)
 		response.flash = T('New bookmark was created !')
 	elif form.errors:
-		response.flash = T('Oops, look whos wrong !')
+		response.flash = T('Oops, look who\'s wrong !')
 
 	return {'form':form}
 	
 @auth.requires_login()
 def show():
-	mymarks = db(db.bookmarks).select()
+	mymarks = db().select(db.bookmarks.ALL, orderby=db.bookmarks.creation)
 	return {'marks':mymarks}
 
 @auth.requires_login()
@@ -41,3 +42,4 @@ def edit():
 		response.flash = T('Oops, look whos wrong !')
 
 	return {'form':form}
+

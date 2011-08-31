@@ -68,3 +68,9 @@ timestamp: 2011-08-29T00:31:38.318370
 ALTER TABLE bookmarks ADD user CHAR(512);
 timestamp: 2011-08-29T23:14:51.510137
 ALTER TABLE bookmarks ADD creation CHAR(512);
+timestamp: 2011-08-31T01:43:19.271688
+ALTER TABLE bookmarks ADD description TEXT;
+timestamp: 2011-08-31T01:43:19.347678
+ALTER TABLE bookmarks ADD keywords CHAR(512);
+timestamp: 2011-08-31T01:57:50.701474
+ALTER TABLE bookmarks ADD note TEXT;

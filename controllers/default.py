@@ -9,7 +9,9 @@ def call():
 
 def index():
 	bookmarks = db(db.bookmarks.status == 'public').select()
-	return {'marks':bookmarks}
+	search = FORM(T('Seach a bookmarks, keyword or user profile:'), INPUT(_name='search',_type='text'), INPUT(_value='Find', _type='submit'))
+	
+	return {'marks':bookmarks, 'search':search}
 
 def about():return {}
 def error():return {}
