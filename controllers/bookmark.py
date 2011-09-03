@@ -16,7 +16,7 @@ def new():
 		'''
 		form = SQLFORM(db.bookmarks, fields=['name','url','note','keywords'])
 	    
-		if form.accepts(request.vars, session, dbio=False):
+		if form.accepts(request.vars, session, dbio=True):
 			db(db.bookmarks).update(user = auth.user.email, creation = request.now)
 			response.flash = T('New bookmark was created !')
 		elif form.errors:
@@ -66,7 +66,8 @@ def search():
 			redirect(URL('default','index'))
 		else:
 			f = db(db.bookmarks.id>0).select()
-			f = f.find(lambda s:request.vars.search in s.name and s.status == 'public').sort(lambda s:s.name) or None
+			#faz a busca da palavra no banco e seleciona tudo o que foi selecionado caso contrario ele retorna None
+			f = f.find(lambda s:request.vars.search in s.name.lower() or request.vars.search in s.name and s.status == 'public').sort(lambda s:s.name) or None
 			
 			if f == None:
 				response.flash = T('Try again !')
