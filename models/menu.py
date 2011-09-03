@@ -1,4 +1,4 @@
-
+T.force('pt-br')
 response.title = settings.title
 response.subtitle = settings.subtitle
 response.meta.author = '%s <%s>' % (settings.author, settings.author_email)
