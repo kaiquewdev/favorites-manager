@@ -7,7 +7,7 @@
 	<ul>
 	{{for row in search:}}
 			{{if row.status == 'public':}}
-				{{=LI(A(row.name, _href=row.url))}}
+				{{=LI(A(row.name, _href=row.url, _title=row.note, _target='top'))}}
 			{{pass}}
 		{{pass}}
 	</ul>
