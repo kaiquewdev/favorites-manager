@@ -369,7 +369,8 @@ h6 {font-size: 0.8em;}
     background: url(../images/logo.png);
 }
 #appname {
-    color: #cccccc;
+    color: #2b2b2b;
+    border-bottom:4px solid;
 }
 
 #right_sidebar { width: 160px; float:right; display: none; }

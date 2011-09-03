@@ -1,0 +1,20 @@
+(dp1
+S'output'
+p2
+S''
+sS'layer'
+p3
+S'/var/www/web2py/applications/favoritesmanager/controllers/bookmark.py'
+p4
+sS'code'
+p5
+S"# -*- coding:utf-8 -*-\n'''\nController para bookmarks onde terao todas as funcoes para trabalhar\ncom os marcadores\n'''\ndef index():\n\t'''\n\tInicio dos bookmarks\n\t'''\n\tredirect(URL('new'))\n\n@auth.requires_login()\t\ndef new():\n\t'''\n\tCria um novo bookmark\n\t'''\n\tform = SQLFORM(db.bookmarks, fields=['name','url','note','keywords'])\n    \n\tif form.accepts(request.vars, session, dbio=False):\n\t\tdb(db.bookmarks).update(user = auth.user.email, creation = request.now)\n\t\tresponse.flash = T('New bookmark was created !')\n\telif form.errors:\n\t\tresponse.flash = T('Oops, look who\\'s wrong !')\n\n\treturn {'form':form}\n\t\n@auth.requires_login()\ndef show():\n\t'''\n\tMostra os bookmarks\n\t'''\n\tmymarks = db().select(db.bookmarks.ALL, orderby=db.bookmarks.creation)\n\treturn {'marks':mymarks}\n\n@auth.requires_login()\ndef remove():\n\t'''\n\tRemove um bookmark\n\t'''\n\tif request.args(0):\n\t\tdb(db.bookmarks.id == request.args(0)).delete()\n\t\tredirect(URL('bookmark','show'));\n\telse:\n\t\tredirect(URL('bookmark','show'))\n\t\t\n@auth.requires_login()\ndef edit():\n\t'''\n\tEdita um bookmark existente\n\t'''\n\trec = db.bookmarks(request.args(0)) or redirect(URL('show'))\n\tform = SQLFORM(db.bookmarks, rec, fields=['name','url'])\n\t\n\tif form.accepts(request.vars, session):\n\t\tredirect(URL('bookmark','show'))\n\telif form.errors:\n\t\tresponse.flash = T('Oops, look whos wrong !')\n\n\treturn {'form':form}\n\ndef search():\n\t'''\n\tFaz a procura por bookmarks\n\t'''\n\tif request.vars.search == '' or request.vars.search == None:\n\t\tredirect(URL('default','index'))\n\telse:\n\t\tsearch = db.bookmarks.like(request.vars.search)\n\t\n\treturn {'search':search}\n\n\nresponse._vars=response._caller(search)\n"
+p6
+sS'snapshot'
+p7
+(dp8
+sS'traceback'
+p9
+S'Traceback (most recent call last):\n  File "/var/www/web2py/gluon/restricted.py", line 192, in restricted\n    exec ccode in environment\n  File "/var/www/web2py/applications/favoritesmanager/controllers/bookmark.py", line 73, in <module>\n  File "/var/www/web2py/gluon/globals.py", line 145, in <lambda>\n    self._caller = lambda f: f()\n  File "/var/www/web2py/applications/favoritesmanager/controllers/bookmark.py", line 68, in search\n    search = db.bookmarks.like(request.vars.search)\n  File "/var/www/web2py/gluon/dal.py", line 4731, in __getattr__\n    return self[key]\n  File "/var/www/web2py/gluon/dal.py", line 4675, in __getitem__\n    return dict.__getitem__(self, str(key))\nKeyError: \'like\'\n'
+p10
+s.

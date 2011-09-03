@@ -1,0 +1,19 @@
+{{ extend 'layout.html' }}
+
+{{if not search == None:}} 
+{{=session.search}}
+<h1>{{=T('Result of ') + '\'' + request.vars.search + '\''}}</h1>
+
+	<ul>
+	{{for row in search:}}
+			{{if row.status == 'public':}}
+				{{=LI(A(row.name, _href=row.url))}}
+			{{pass}}
+		{{pass}}
+	</ul>
+	{{else:}}
+	<h1>{{=T('Oops... nothing finded !')}}</h1>
+		{{=session.search}}
+{{pass}}
+
+{{=A(T('Back'), _href=URL('default','index'))}}
