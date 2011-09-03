@@ -13,8 +13,9 @@ if request.env.web2py_runtime_gae:            # if running on Google App Engine
     # from gluon.contrib.memdb import MEMDB
     # from google.appengine.api.memcache import Client
     # session.connect(request, response, db = MEMDB(Client()))
-else:                                         # else use a normal relational database
-    db = DAL('sqlite://storage.sqlite')      # if not, use SQLite or other DB
+else:
+    db = DAL('sqlite://storage.sqlite')       # else use a normal relational database
+    #db = DAL('mysql://root:dev@localhost/brands')      # if not, use SQLite or other DB
 
 # by default give a view/generic.extension to all actions from localhost
 # none otherwise. a pattern can be 'controller/function.extension'

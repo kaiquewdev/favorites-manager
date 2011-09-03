@@ -29,7 +29,7 @@ def show():
 		'''
 		Mostra os bookmarks
 		'''
-		mymarks = db().select(db.bookmarks.ALL, orderby=db.bookmarks.creation)
+		mymarks = db().select(db.bookmarks.ALL, orderby=db.bookmarks.name)
 		return {'marks':mymarks}
 
 @auth.requires_login()

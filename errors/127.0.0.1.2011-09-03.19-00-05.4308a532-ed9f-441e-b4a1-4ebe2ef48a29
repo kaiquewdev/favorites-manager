@@ -1,0 +1,20 @@
+(dp1
+S'output'
+p2
+S''
+sS'layer'
+p3
+S'/var/www/web2py/applications/favoritesmanager/controllers/bookmark.py'
+p4
+sS'code'
+p5
+S"# -*- coding:utf-8 -*-\n'''\nController para bookmarks onde terao todas as funcoes para trabalhar\ncom os marcadores\n'''\ndef index():\n\t\t'''\n\t\tInicio dos bookmarks\n\t\t'''\n\t\tredirect(URL('new'))\n\n@auth.requires_login()\t\ndef new():\n\t\t'''\n\t\tCria um novo bookmark\n\t\t'''\n\t\tform = SQLFORM(db.bookmarks, fields=['name','url','note','keywords'])\n\t    \n\t\tif form.accepts(request.vars, session, dbio=True):\n\t\t\tdb(db.bookmarks).update(user = auth.user.email, creation = request.now)\n\t\t\tresponse.flash = T('New bookmark was created !')\n\t\telif form.errors:\n\t\t\tresponse.flash = T('Oops, look who\\'s wrong !')\n\t\n\t\treturn {'form':form}\n\t\n@auth.requires_login()\ndef show():\n\t\t'''\n\t\tMostra os bookmarks\n\t\t'''\n\t\tmymarks = db().select(db.bookmarks.ALL, orderby=db.bookmarks.nome)\n\t\treturn {'marks':mymarks}\n\n@auth.requires_login()\ndef remove():\n\t\t'''\n\t\tRemove um bookmark\n\t\t'''\n\t\tif request.args(0):\n\t\t\tdb(db.bookmarks.id == request.args(0)).delete()\n\t\t\tredirect(URL('bookmark','show'));\n\t\telse:\n\t\t\tredirect(URL('bookmark','show'))\n\t\t\n@auth.requires_login()\ndef edit():\n\t\t'''\n\t\tEdita um bookmark existente\n\t\t'''\n\t\trec = db.bookmarks(request.args(0)) or redirect(URL('show'))\n\t\tform = SQLFORM(db.bookmarks, rec, fields=['name','url'])\n\t\t\n\t\tif form.accepts(request.vars, session):\n\t\t\tredirect(URL('bookmark','show'))\n\t\telif form.errors:\n\t\t\tresponse.flash = T('Oops, look whos wrong !')\n\t\n\t\treturn {'form':form}\n\ndef search():\n\t\t'''\n\t\tFaz a procura por bookmarks\n\t\t'''\n\t\tif request.vars.search == '' or request.vars.search == None:\n\t\t\tredirect(URL('default','index'))\n\t\telse:\n\t\t\tf = db(db.bookmarks.id>0).select()\n\t\t\t#faz a busca da palavra no banco e seleciona tudo o que foi selecionado caso contrario ele retorna None\n\t\t\tf = f.find(lambda s:request.vars.search in s.name.lower() or request.vars.search in s.name and s.status == 'public').sort(lambda s:s.name) or None\n\t\t\t\n\t\t\tif f == None:\n\t\t\t\tresponse.flash = T('Try again !')\n\t\t\t\n\t\t\n\t\treturn {'search':f}\n\n\nresponse._vars=response._caller(show)\n"
+p6
+sS'snapshot'
+p7
+(dp8
+sS'traceback'
+p9
+S'Traceback (most recent call last):\n  File "/var/www/web2py/gluon/restricted.py", line 192, in restricted\n    exec ccode in environment\n  File "/var/www/web2py/applications/favoritesmanager/controllers/bookmark.py", line 79, in <module>\n  File "/var/www/web2py/gluon/globals.py", line 145, in <lambda>\n    self._caller = lambda f: f()\n  File "/var/www/web2py/gluon/tools.py", line 2462, in f\n    return action(*a, **b)\n  File "/var/www/web2py/applications/favoritesmanager/controllers/bookmark.py", line 32, in show\n    mymarks = db().select(db.bookmarks.ALL, orderby=db.bookmarks.nome)\n  File "/var/www/web2py/gluon/dal.py", line 4731, in __getattr__\n    return self[key]\n  File "/var/www/web2py/gluon/dal.py", line 4675, in __getitem__\n    return dict.__getitem__(self, str(key))\nKeyError: \'nome\'\n'
+p10
+s.
