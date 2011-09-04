@@ -4,7 +4,7 @@
 {{=session.search}}
 <h1>{{=T('Result of ') + '\'' + request.vars.search + '\''}}</h1>
 
-	<ul>
+	<ul class='lista'>
 	{{for row in search:}}
 			{{if row.status == 'public':}}
 				{{=LI(A(row.name, _href=row.url, _title=row.note, _target='top'))}}

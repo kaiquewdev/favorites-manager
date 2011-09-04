@@ -1,5 +1,6 @@
 # coding: utf8
 {
+' by ': ' by ',
 '"update" is an optional expression like "field1=\'newvalue\'". You cannot update or delete the results of a JOIN': '"update" is an optional expression like "field1=\'newvalue\'". You cannot update or delete the results of a JOIN',
 '%Y-%m-%d': '%Y-%m-%d',
 '%Y-%m-%d %H:%M:%S': '%Y-%m-%d %H:%M:%S',
@@ -36,6 +37,7 @@
 'Internal State': 'Internal State',
 'Invalid Query': 'Invalid Query',
 'Invalid email': 'Email invalido',
+'Invalid login': 'Invalid login',
 'Invalid password': 'Invalid password',
 'Keywords': 'Keywords',
 'Last Name': 'Último nome',
@@ -85,6 +87,7 @@
 'Verify Password': 'Verificar Senha',
 'Visualize your bookmarks': 'Visualizar marcas',
 'Welcome': 'Bem-Vindo',
+'by ': 'by ',
 'cache': 'cache',
 'database %s select': 'database %s select',
 'db': 'db',
@@ -105,4 +108,5 @@
 'register': 'registrar',
 'selected': 'selecionado',
 'state': 'estado',
+'value already in database or empty': 'value already in database or empty',
 }

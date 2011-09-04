@@ -14,10 +14,10 @@ def new():
 		'''
 		Cria um novo bookmark
 		'''
-		form = SQLFORM(db.bookmarks, fields=['name','url','note','keywords'])
+		form = SQLFORM(Bookmarks, fields=['name','url','note','keywords'])
 	    
 		if form.accepts(request.vars, session, dbio=True):
-			db(db.bookmarks).update(user = auth.user.email, creation = request.now)
+			db(Bookmarks).update(user = auth.user.email, creation = request.now, author = auth.user.username)
 			response.flash = T('New bookmark was created !')
 		elif form.errors:
 			response.flash = T('Oops, look who\'s wrong !')
@@ -29,7 +29,7 @@ def show():
 		'''
 		Mostra os bookmarks
 		'''
-		mymarks = db().select(db.bookmarks.ALL, orderby=db.bookmarks.name)
+		mymarks = db().select(Bookmarks.ALL, orderby=Bookmarks.name)
 		return {'marks':mymarks}
 
 @auth.requires_login()
@@ -38,7 +38,7 @@ def remove():
 		Remove um bookmark
 		'''
 		if request.args(0):
-			db(db.bookmarks.id == request.args(0)).delete()
+			db(Bookmarks.id == request.args(0)).delete()
 			redirect(URL('bookmark','show'));
 		else:
 			redirect(URL('bookmark','show'))
@@ -48,8 +48,8 @@ def edit():
 		'''
 		Edita um bookmark existente
 		'''
-		rec = db.bookmarks(request.args(0)) or redirect(URL('show'))
-		form = SQLFORM(db.bookmarks, rec, fields=['name','url'])
+		rec = Bookmarks(request.args(0)) or redirect(URL('show'))
+		form = SQLFORM(Bookmarks, rec, fields=['name','url'])
 		
 		if form.accepts(request.vars, session):
 			redirect(URL('bookmark','show'))
@@ -65,7 +65,7 @@ def search():
 		if request.vars.search == '' or request.vars.search == None:
 			redirect(URL('default','index'))
 		else:
-			f = db(db.bookmarks.id>0).select()
+			f = db(Bookmarks.id>0).select()
 			#faz a busca da palavra no banco e seleciona tudo o que foi selecionado caso contrario ele retorna None
 			f = f.find(lambda s:request.vars.search in s.name.lower() or request.vars.search in s.name and s.status == 'public').sort(lambda s:s.name) or None
 			

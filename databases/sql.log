@@ -150,3 +150,13 @@ CREATE TABLE bookmarks(
     PRIMARY KEY(id)
 ) ENGINE=InnoDB CHARACTER SET utf8;
 success!
+timestamp: 2011-09-04T01:16:08.285945
+CREATE TABLE lists(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    userid CHAR(512),
+    name CHAR(512),
+    keywords CHAR(512)
+);
+success!
+timestamp: 2011-09-04T01:19:44.273124
+ALTER TABLE bookmarks ADD author CHAR(512);

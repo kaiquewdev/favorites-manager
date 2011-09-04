@@ -123,7 +123,7 @@ mail.settings.server = settings.email_server
 mail.settings.sender = settings.email_sender
 mail.settings.login = settings.email_login
 
-#Modifications
+#Bookmarks table
 '''
   define a type of status:
   -private <- paticular, somente o dono da conta podera visualizar
@@ -131,11 +131,23 @@ mail.settings.login = settings.email_login
   -share <- podera compartilhar com redes sociais
 '''
 db.define_table('bookmarks',
-  Field('user',type='string', requires=IS_NOT_EMPTY()),
-  Field('name',type='string',label=T('Name of Bookmark'), requires=[IS_NOT_EMPTY(),IS_NOT_IN_DB(db, 'bookmarks.name')]),
-  Field('url',type='string', label=T('Url of Bookmark'), default='http://', requires=[IS_NOT_EMPTY(), IS_URL(), IS_NOT_IN_DB(db, 'bookmarks.url')]),
-  Field('note', type='text', label=T('Little Note'), requires=[IS_LENGTH(maxsize=120)]),
-  Field('keywords', label=T('Keywords')),
-  Field('status',type='string', requires=IS_NOT_EMPTY(), default='public'),
-  Field('creation', requires=IS_NOT_EMPTY())
+                Field('user',type='string', requires=IS_NOT_EMPTY()),
+                Field('author', type='string', requires=IS_NOT_EMPTY()),
+                Field('name',type='string',label=T('Name of Bookmark'), requires=[IS_NOT_EMPTY(),IS_NOT_IN_DB(db, 'bookmarks.name')]),
+                Field('url',type='string', label=T('Url of Bookmark'), default='http://', requires=[IS_NOT_EMPTY(), IS_URL(), IS_NOT_IN_DB(db, 'bookmarks.url')]),
+                Field('note', type='text', label=T('Little Note'), requires=[IS_LENGTH(maxsize=120)]),
+                Field('keywords', label=T('Keywords')),
+                Field('status',type='string', requires=IS_NOT_EMPTY(), default='public'),
+                Field('creation', requires=IS_NOT_EMPTY())
 )
+
+db.define_table('lists',
+                Field('userid', requires=IS_NOT_EMPTY()),
+                Field('name', type='string', label=T('Name'), requires=IS_NOT_EMPTY()),
+                Field('keywords')
+                )
+
+#Globals
+Bookmarks = db.bookmarks
+Lists = db.lists
+

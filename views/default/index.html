@@ -5,9 +5,9 @@
 <h1>{{=T('Look at the public marks:') }}</h1>
 
 {{if marks:}}
-	<ul>
+	<ul class='lista'>
 	{{for m in marks:}}
-		{{=LI(A(m.name, _href=m.url, _title=m.note, _target='top'))}}
+		{{=LI(A(m.name, _href=m.url, _title=m.note, _target='top'), T(' by ') + m.author)}}
 	{{pass}}
 	</ul>
 {{pass}}
