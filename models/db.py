@@ -39,8 +39,8 @@ service = Service()                            # for json, xml, jsonrpc, xmlrpc,
 plugins = PluginManager()                      # for configuring plugins
 
 mail.settings.server = 'logging' or 'smtp.gmail.com:587'  # your SMTP server
-mail.settings.sender = 'you@gmail.com'         # your email
-mail.settings.login = 'username:password'      # your credentials or None
+mail.settings.sender = 'kaique.developer@gmail.com'         # your email
+mail.settings.login = 'kaique:password'      # your credentials or None
 
 auth.settings.hmac_key = 'sha512:717ac61d-d1dc-470b-b2ee-8da8e1059ef2'   # before define_tables()
 

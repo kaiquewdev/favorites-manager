@@ -16,8 +16,16 @@ def new():
 		'''
 		form = SQLFORM(Bookmarks, fields=['name','url','note','keywords'])
 	    
-		if form.accepts(request.vars, session, dbio=True):
-			db(Bookmarks).update(user = auth.user.email, creation = request.now, author = auth.user.username)
+		if form.accepts(request.vars, session, dbio = False):
+			Bookmarks.insert(
+								user = auth.user.email,
+								author = auth.user.username,
+								name = form.vars.name,
+								url = form.vars.url,
+								note = form.vars.note,
+								keywords = form.vars.keywords,
+								status = 'public',
+								creation = request.now)
 			response.flash = T('New bookmark was created !')
 		elif form.errors:
 			response.flash = T('Oops, look who\'s wrong !')
