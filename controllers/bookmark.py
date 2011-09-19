@@ -26,7 +26,7 @@ def new():
 								keywords = form.vars.keywords,
 								status = 'public',
 								creation = request.now)
-			response.flash = T('New bookmark was created !')
+			response.flash = T('{0} was created !').format(form.vars.name)
 		elif form.errors:
 			response.flash = T('Oops, look who\'s wrong !')
 	
@@ -37,7 +37,7 @@ def show():
 		'''
 		Mostra os bookmarks
 		'''
-		mymarks = db().select(Bookmarks.ALL, orderby=Bookmarks.name)
+		mymarks = db().select(Bookmarks.ALL, orderby=Bookmarks.creation)
 		return {'marks':mymarks}
 
 @auth.requires_login()
@@ -57,7 +57,7 @@ def edit():
 		Edita um bookmark existente
 		'''
 		rec = Bookmarks(request.args(0)) or redirect(URL('show'))
-		form = SQLFORM(Bookmarks, rec, fields=['name','url'])
+		form = SQLFORM(Bookmarks, rec, fields=['name','url', 'note'])
 		
 		if form.accepts(request.vars, session):
 			redirect(URL('bookmark','show'))

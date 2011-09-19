@@ -138,7 +138,7 @@ db.define_table('bookmarks',
                 Field('note', type='text', label=T('Little Note'), requires=[IS_LENGTH(maxsize=120)]),
                 Field('keywords', label=T('Keywords')),
                 Field('status',type='string', requires=IS_NOT_EMPTY(), default='public'),
-                Field('creation', requires=IS_NOT_EMPTY())
+                Field('creation', 'datetime', requires=IS_NOT_EMPTY())
 )
 
 db.define_table('lists',
