@@ -60,6 +60,7 @@
 'New bookmark was created !': 'Nova marca foi criada !',
 'New password': 'Nova Senha',
 'No bookmarks': 'No bookmarks',
+'Object or table name': 'Object or table name',
 'Old password': 'Senha antiga',
 "Oops, look who's wrong !": 'Oops, olhe o que há de errado !',
 'Oops, look whos wrong !': 'Oops, look whos wrong !',

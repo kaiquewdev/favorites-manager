@@ -26,6 +26,7 @@ def new():
 								keywords = form.vars.keywords,
 								status = 'public',
 								creation = request.now)
+
 			response.flash = T('{0} was created !').format(form.vars.name)
 		elif form.errors:
 			response.flash = T('Oops, look who\'s wrong !')
@@ -34,11 +35,11 @@ def new():
 	
 @auth.requires_login()
 def show():
-		'''
-		Mostra os bookmarks
-		'''
-		mymarks = db().select(Bookmarks.ALL, orderby=Bookmarks.creation)
-		return {'marks':mymarks}
+    '''
+    Mostra os bookmarks
+    '''
+    mymarks = db(Bookmarks.user == auth.user.email).select()
+    return {'marks':mymarks}
 
 @auth.requires_login()
 def remove():

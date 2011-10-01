@@ -1,7 +1,6 @@
 {{ extend 'layout.html' }}
 
 <h1>{{=T('My Bookmarks:')}}</h1>
-
 {{if marks:}}
 <ul class='lista'>
 	{{for m in marks:}}
@@ -10,9 +9,9 @@
                 #Link para da marca
                 A(m.name, _href=m.url, _target='top'), ' | ', 
                 #Remover marca, com confirmacao
-                A(T('Remove'), _href=URL('bookmark','remove/'+str(m.id)), _onclick='if(!window.confirm("You want remove bookmark ?")){return false}'), ' | ', 
+                A(T('Remove'), _href=URL('bookmark','remove/' + str(m.id)), _onclick='if(!window.confirm("You want remove bookmark ?")){return false}'), ' | ', 
                 #Editar marca
-                A(T('Edit'), _href=URL('bookmark','edit/'+str(m.id))),
+                A(T('Edit'), _href=URL('bookmark','edit/' + str(m.id))),
                 #Descricao da marca
                 DIV(T('Description: {0}').format(m.note), _class='description')
             )}}
